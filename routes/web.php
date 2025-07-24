@@ -16,6 +16,9 @@ Route::middleware(['auth', 'role:admin'])->group(function (){
         return view('admin.dashboard');
     })->name('admin.dashboard');
     Route::resource('/admin/books', BookController::class);
+    Route::get('/admin/deleted/books', [BookController::class, 'deleted'])->name('books.deleted');
+    Route::patch('/admin/deleted/books/{id}', [BookController::class, 'restore'])->name('books.restore');
+    Route::delete('/admin/deleted/books/{id}', [BookController::class, 'perish'])->name('books.perish');
     Route::resource('/admin/category', CategoryController::class);
     Route::resource('/admin/publisher', PublisherController::class);
 });
